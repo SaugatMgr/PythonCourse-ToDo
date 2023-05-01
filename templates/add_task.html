@@ -3,9 +3,41 @@
 {% block title %}Add Tasks{% endblock %}
 
 {% block content %}
-    <h1>Add Task</h1>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        let button = document.querySelector('#task_submit');
+        button.disabled = true;
+    
+        document.querySelector('#task_title').onkeyup = () => {
+            if (document.querySelector("#task_title").value.length > 0){
+                button.disabled = false;
+            }
+            else{
+                button.disabled = true;
+            }
+        }
+    });
+</script>
+<div class="container-md border"  style="margin-top: 15px; border-radius: 10px;">
+    <h3>Add Task</h3>
     <form action="" method="post">{% csrf_token %}
-        Title:<input type="text" name="title">
-        <button type="submit">Add</button>
+        Title:
+        <div class="col">
+            <input type="text" class="form-control" name="title" aria-label="Task Title" id="task_title">
+        </div>
+        Username:
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">@</span>
+            <input type="text" name="user" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+        </div>
+        <span style="margin-bottom: 3px">About Task:</span>
+        <div class="form-floating">
+            <textarea class="form-control" name="about_task" placeholder="Leave a comment here" id="floatingTextarea1" style="height: 100px"></textarea>
+            <label for="floatingTextarea1">Details</label>
+        </div>
+        <button type="submit" class="btn btn-outline-primary" id="task_submit" style="margin: 8px 0px 10px 0px; width: 70px;">
+            Add
+        </button>
     </form>
+</div>
 {% endblock %}

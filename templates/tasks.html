@@ -3,16 +3,22 @@
 {% block title %}Tasks{% endblock %}
 
 {% block content %}
-<h2>My ToDo List</h2>
-<a href="{% url 'add_task' %}">
-    <button>
-        Add Task
-    </button>
-</a>
-
-<ul>
+<div class="container-md"  style="margin-top: 15px; border-radius: 10px;">
+  <div class="row row-cols-1 row-cols-md-3 g-4" style="margin: 0px 0px 15px 0px; border-radius: 10px;">
     {% for task in tasks %}
-        <li>{{task.title}}</li>
+      <div class="col">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">{{task.title}}</h5>
+            <a href="{% url 'details' task.pk %}" class="btn btn-success">Details</a>
+            <a href="{% url 'update' task.pk %}" class="btn btn-success">Update</a>
+            <a href="{% url 'delete' task.pk %}" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <h3>No Tasks</h3>
     {% endfor %}
-</ul>
+  </div>
+</div>
 {% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}Task Detail{% endblock %}
+
+{% block content %}
+<div class="container-md border text-center" style="margin-top: 15px; border-radius: 10px; width: 400px;">
+    <div class="row">
+        <div class="col">
+            <h4>{{task.title}}</h4>
+        </div>
+    </div>
+</div>
+<div class="container-md border" style="margin-top: 15px; border-radius: 10px; width: 400px;">
+    <div class="row">
+        <div class="col">
+            <p style="margin-top: 5px;">{{task.detail}}</p>
+        </div>
+    </div>
+</div>
+
+<div class="container-md" style="margin-top: 10px; width: 400px;">
+    <form action="" method="post">{% csrf_token %}
+        <a href="{% url 'update' task.pk %}" class="btn btn-outline-info" style="margin-right: 5px;">
+            Update
+        </a>
+        <a href="{% url 'delete' task.pk %}" class="btn btn-outline-danger">
+            Delete
+        </a>
+    </form>
+</div>
+
+{% endblock %}
